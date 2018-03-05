@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# Custom config file
+src/config.ts
+
+# Generated Javascript file
+dist/

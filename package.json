@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/Talha-T/twitch-bot/issues"
   },
-  "homepage": "https://github.com/Talha-T/twitch-bot#readme"
+  "homepage": "https://github.com/Talha-T/twitch-bot#readme",
+  "dependencies": {
+    "@types/node": "^9.4.6",
+    "tslint": "^5.9.1",
+    "twitch-wrapper-ts": "^1.0.1",
+    "typescript": "^2.7.2"
+  }
 }

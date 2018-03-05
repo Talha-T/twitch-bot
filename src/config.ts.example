@@ -1,0 +1,15 @@
+export interface IConfig {
+    apiOauth: string;
+    chatOauth: string;
+    clientId: string;
+    username: string;
+}
+
+const config: IConfig = {
+    apiOauth: "your oauth token per user",
+    chatOauth: "get one from http://twitchapps.com/tmi",
+    clientId: "your api client id",
+    username: "twitch username",
+}
+
+export default config;

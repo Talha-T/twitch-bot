@@ -1,0 +1,24 @@
+{
+  "name": "twitch-bot",
+  "version": "0.1.0",
+  "description": "Twitch bot built with twitch-wrapper-ts",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Talha-T/twitch-bot.git"
+  },
+  "keywords": [
+    "twitch",
+    "bot",
+    "typescript"
+  ],
+  "author": "Talha-T aka Implicit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Talha-T/twitch-bot/issues"
+  },
+  "homepage": "https://github.com/Talha-T/twitch-bot#readme"
+}

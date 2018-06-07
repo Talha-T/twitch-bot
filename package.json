@@ -4,7 +4,10 @@
   "description": "Twitch bot built with twitch-wrapper-ts",
   "main": "src/index.js",
   "scripts": {
-    "test": "node test/main.js"
+    "test": "node test/main.js",
+    "start": "node dist/index.js",
+    "prestart": "npm run tsc",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,7 +25,9 @@
   },
   "homepage": "https://github.com/Talha-T/twitch-bot#readme",
   "dependencies": {
+    "@types/fs-promise": "^1.0.3",
     "@types/node": "^9.4.6",
+    "chalk": "^2.3.2",
     "tslint": "^5.9.1",
     "twitch-wrapper-ts": "^1.0.1",
     "typescript": "^2.7.2"

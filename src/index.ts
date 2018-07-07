@@ -2,7 +2,8 @@
 import { ChannelUserState, Message, Twitch } from "twitch-wrapper-ts";
 import config from "./config";
 import { readdir } from "fs";
-import { ICommand } from "./command";
+import { ICommand, IParameter, Parameter, VariableType } from "./command";
+import { valid } from "sandhands";
 //#endregion
 
 // Connect to twitch with parameters defined in config
@@ -32,7 +33,7 @@ readdir("./dist/commands", (err, files) => {
         // require path is relative
         const requirePath = `./commands/${normalizedName}`;
         const command = require(requirePath) as ICommand;
-        
+
         // Push required command to the commands array
         commands.push(command);
 
@@ -45,7 +46,8 @@ readdir("./dist/commands", (err, files) => {
 
 function getCommandSyntax(command: ICommand): string {
     // Join parameters by description
-    const paramsJoint = command.parameters.map((param) => param.description).join(" ");
+    const paramsJoint = command.parameters.map(
+        (param) => param.description).join(", ");
     return `${config.defaultPrefix} ${command.displayName} ${paramsJoint}`;
 }
 
@@ -76,7 +78,36 @@ twitch.on("message", (message: Message, channelState: ChannelUserState) => {
             if (args.length < command.parameters.length) {
                 await twitch.send("Usage: " + getCommandSyntax(command), "implicit1");
             } else {
-                // Enough parameters, run command.
+                // Enough parameters, check for parameter types.
+
+                // Placeholder parameter
+                let notValidParameter: IParameter = new Parameter("", String);
+
+                // Check if at least one arg is invalid.
+                const notValid = args.some((arg, index) => {
+                    // Get the parameter type required by command.
+                    const requiredParameter = command.parameters[index];
+
+                    // Set not valid parameter detials.
+                    notValidParameter = requiredParameter;
+                    return !valid(requiredParameter.type(arg), requiredParameter.type);
+                });
+
+                // We have to make it any, so they are the same type.
+                const humanReadableTypes = new Map([
+                    [String as any, "String"],
+                    [Number, "Number"]
+                ]);
+
+                // If one argument is not valid, 
+                if (notValid) {
+                    // Get the human readable type from function.
+                    const humanReadableType = humanReadableTypes.get(notValidParameter.type) as string;
+                    
+                    await twitch.send(`Parameter ${notValidParameter.description} should be a ${humanReadableType}`, message.channel);
+                    return;
+                }
+
                 command.run(twitch, message, ...args);
             }
 

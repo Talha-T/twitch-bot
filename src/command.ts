@@ -1,22 +1,6 @@
 import { Message, Twitch } from "twitch-wrapper-ts";
 
-/**
- * Specifies the type for the command parameter.
- */
-enum ParameterType {
-    /**
-     * Used for decimals with a max precision value of 3.
-     */
-    Decimal = "[0-9]+(\\.[0-9]{1,3})?",
-    /**
-     * Used for numbers only. No decimals.
-     */
-    Number = "\\d+",
-    /**
-     * Used for strings. Does not match special characters.
-     */
-    Word = "[A-Za-z\\s]+",
-}
+export type VariableType = StringConstructor | BooleanConstructor | NumberConstructor;
 
 /**
  * Defines a parameter for a command.
@@ -29,7 +13,7 @@ interface IParameter {
     /**
      * Specifies the type of this parameter.
      */
-    type: ParameterType;
+    type: VariableType;
 }
 
 /**
@@ -43,8 +27,8 @@ class Parameter implements IParameter {
     /**
      * Specifies the type of this parameter.
      */
-    public type: ParameterType;
-    constructor(desc: string, type: ParameterType) {
+    public type: VariableType;
+    constructor(desc: string, type: VariableType) {
         this.description = desc;
         this.type = type;
     }
@@ -76,4 +60,4 @@ interface ICommand {
     slug: string;
 }
 
-export { ICommand, IParameter, Parameter, ParameterType };
+export { ICommand, IParameter, Parameter };

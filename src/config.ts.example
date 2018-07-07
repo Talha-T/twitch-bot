@@ -1,8 +1,28 @@
+/**
+ * Defines a config file for the bot.
+ */
 export interface IConfig {
-    apiOauth: string;
+    /**
+     * Oauth key which is used for Twitch API.
+     * **Optional.**
+     */
+    apiOauth?: string;
+    /**
+     * Oauth key which is used for Twitch chat. Get it from http://twitchapps.com/tmi/
+     */
     chatOauth: string;
-    clientId: string;
+    /**
+     * Client id which is required for the Twitch API.
+     * **Optional.**
+     */
+    clientId?: string;
+    /**
+     * User id for the bot to login with.
+     */
     username: string;
+    /**
+     * Defult prefix for the bot.
+     */
     defaultPrefix: string;
 }
 

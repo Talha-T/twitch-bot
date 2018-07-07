@@ -5,10 +5,13 @@ Sample Twitch bot built with twitch-wrapper-ts
 ## How is it different?
 - Based on Typescript
 - Has **Parameter Types**
-## How do I use it?
+## How do I start it?
 - Clone this repo
 - edit `config.ts.example` and rename it to `config.ts`
 - change the channel in index.ts
 - `npm install`
 - `npm start` (will compile automatically)
 - Tada!
+## How do I extend it?
+- See commands folder
+- Modify example.ts and create new commands as you want, they will be added automatically.

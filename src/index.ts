@@ -72,7 +72,7 @@ twitch.on("message", (message: Message, channelState: ChannelUserState) => {
             const cropped = message.content.substr(commandCall.length + 1);
 
             // , is the seperator for arguments
-            const args: string[] = cropped.split(",");
+            const args: any[] = cropped.split(",");
 
             // If there are not enough parameters given, tell that usage is inappropriate.
             if (args.length < command.parameters.length) {
@@ -90,6 +90,9 @@ twitch.on("message", (message: Message, channelState: ChannelUserState) => {
 
                     // Set not valid parameter detials.
                     notValidParameter = requiredParameter;
+                    
+                    // Change the type to correct one
+                    args[index] = requiredParameter.type(arg);
                     return !valid(requiredParameter.type(arg), requiredParameter.type);
                 });
 

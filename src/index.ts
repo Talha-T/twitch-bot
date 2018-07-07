@@ -32,8 +32,8 @@ readdir("./dist/commands", (err, files) => {
         // require path is relative
         const requirePath = `./commands/${normalizedName}`;
         const command = require(requirePath) as ICommand;
-        // the exports.path has the priority, for special cases such as / to index
-
+        
+        // Push required command to the commands array
         commands.push(command);
 
         console.log(`Command ${command.displayName} is loaded from ${name}`);
